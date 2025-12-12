@@ -12,63 +12,63 @@ export interface Facility {
 export const facilities: Facility[] = [
     {
         id: "1",
-        title: "Modern Laboratories",
-        description: "State-of-the-art labs for pathology, microbiology, hematology, and diagnostic training with latest equipment.",
+        title: "Lab Se Practical Sikho",
+        description: "Our labs have all the equipment you'll use in real hospitals - microscopes, analyzers, the works. Students spend a lot of time here doing actual tests, not just reading about them.",
         icon: "lab",
         image: "/facility-lab.png",
         features: ["Binocular Microscopes", "Hematology Analyzers", "Biochemistry Equipment"]
     },
     {
         id: "2",
-        title: "Smart Computer Labs",
-        description: "Fully equipped computer labs with modern hardware and software for digital learning and skill development.",
+        title: "Computer Lab",
+        description: "Every student gets their own computer during lab hours. We use it for data entry practice, report writing, and sometimes for online classes when needed.",
         icon: "computer",
         image: "/facility-computer.png",
         features: ["High-Speed Internet", "Latest Software", "Individual Workstations"]
     },
     {
         id: "3",
-        title: "Library & Resources",
-        description: "Extensive collection of reference books, journals, e-resources, and previous year papers for academic excellence.",
+        title: "Library",
+        description: "Our library isn't huge, but it has all the books you'll need for your course. Previous year question papers are also available - students find those very helpful before exams.",
         icon: "library",
         image: "/facility-library.png",
-        features: ["5000+ Books", "Digital Resources", "Quiet Study Areas"]
+        features: ["Course Books", "Reference Materials", "Previous Year Papers"]
     },
     {
         id: "4",
-        title: "Online Learning Platform",
-        description: "Access courses anytime, anywhere with our dedicated online learning platform launched in 2020.",
+        title: "Online Classes Available",
+        description: "We started online classes during COVID and kept them running for students who can't come daily. You can watch lectures from home if you miss a class.",
         icon: "online",
-        features: ["24/7 Access", "Video Lectures", "Online Assessments"]
+        features: ["Video Lectures", "Notes Download", "Recorded Classes"]
     },
     {
         id: "5",
-        title: "Clinical Training Setup",
-        description: "Practical training facilities for hands-on experience in healthcare procedures and patient care.",
+        title: "Hospital Training",
+        description: "We take students to partner hospitals for practical training. Nothing beats learning by actually working with patients under supervision of senior doctors.",
         icon: "clinical",
-        features: ["Patient Simulation", "Medical Equipment", "Supervised Training"]
+        features: ["Hospital Visits", "Hands-on Practice", "Supervised Training"]
     },
     {
         id: "6",
-        title: "Research Facilities",
-        description: "Dedicated research center for healthcare research, innovation, and academic projects.",
+        title: "Project Help",
+        description: "Final year students need to submit projects. Our teachers guide you through the whole process - from choosing a topic to making the report.",
         icon: "research",
-        features: ["Research Lab", "Project Guidance", "Publication Support"]
+        features: ["Topic Selection", "Research Guidance", "Report Writing Help"]
     },
     {
         id: "7",
-        title: "Smart Classrooms",
-        description: "Well-ventilated rooms with projector-enabled smart classes for enhanced learning experience.",
+        title: "Clean Classrooms",
+        description: "We have AC classrooms with projectors. Nothing fancy, but comfortable enough for a full day of classes. Seats are comfortable too.",
         icon: "classroom",
         image: "/facility-classroom.png",
-        features: ["HD Projectors", "AC Rooms", "Ergonomic Seating"]
+        features: ["Projector", "AC", "Comfortable Seating"]
     },
     {
         id: "8",
-        title: "Global Certification",
-        description: "Our certificates are recognized by top institutes across India with international accreditation.",
+        title: "Job-Ready Certificate",
+        description: "Our certificates are recognized by hospitals and labs across Bihar. Many of our students are working in good places now - that's the real proof.",
         icon: "certificate",
-        features: ["ISO Certified", "Industry Recognition", "Career Support"]
+        features: ["Recognized Certificate", "Placement Support", "Alumni Network"]
     }
 ];
 
@@ -76,26 +76,26 @@ export const facilities: Facility[] = [
 export const keyFeatures = [
     {
         id: "1",
-        title: "Global Certificate",
-        description: "Our Certificates are recognized by the top institutes of India.",
+        title: "Valid Certificate",
+        description: "Our certificate is accepted in hospitals and diagnostic labs across Bihar and outside too.",
         icon: "globe"
     },
     {
         id: "2",
-        title: "Quality Education",
-        description: "Our quality education is trusted by 2000+ students with student-friendly approach.",
+        title: "Trusted Since 2000",
+        description: "We've been teaching for more than 20 years now. 2000+ students have graduated from here.",
         icon: "star"
     },
     {
         id: "3",
-        title: "Skilled Teachers",
-        description: "Experienced faculty and mentors dedicated to student success.",
+        title: "Good Teachers",
+        description: "Most of our teachers have worked in hospitals. They teach from experience, not just books.",
         icon: "teacher"
     },
     {
         id: "4",
-        title: "Flexible Learning",
-        description: "Online and offline modes available for all programs.",
+        title: "Flexible Timing",
+        description: "Can't come daily? We have online classes too. Ask us about batch timings.",
         icon: "flexible"
     }
 ];
