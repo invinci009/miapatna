@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
+import AOSProvider from "@/components/providers/AOSProvider";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,17 +21,17 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ignius Paramedical College | Patna",
+    default: "Ignius Paramedical College | Best Paramedical Institute in Patna",
     template: "%s | Ignius Paramedical College"
   },
-  description: "Ignius Paramedical College offers quality paramedical education in Patna, Bihar. Courses include BMLT, DMLT, BPT, BOTT with globally recognized certificates.",
-  keywords: ["Ignius Paramedical College", "IPC", "paramedical institute Patna", "BMLT course Bihar", "DMLT Patna", "BPT course", "healthcare education"],
+  description: "Best Paramedical College in Patna, Bihar. Ignius Paramedical College offers BMLT, DMLT, BPT, BOTT courses with globally recognized certificates. 2000+ students trained since 2000.",
+  keywords: ["Best Paramedical College Patna", "Ignius Paramedical College", "IPC", "paramedical institute Patna", "BMLT course Bihar", "DMLT Patna", "BPT course", "healthcare education Bihar"],
   authors: [{ name: "Ignius Paramedical College" }],
   openGraph: {
     type: "website",
     url: "https://miapatna.vercel.app/",
-    title: "Ignius Paramedical College | Healthcare Education Since 2000",
-    description: "Quality paramedical education in Patna. BMLT, DMLT, BPT, BOTT courses with globally recognized certificates. 2000+ students trained.",
+    title: "Ignius Paramedical College | Best Paramedical Institute in Patna",
+    description: "Best Paramedical College in Patna. BMLT, DMLT, BPT, BOTT courses with globally recognized certificates. 2000+ students trained.",
     siteName: "Ignius Paramedical College",
     images: [{
       url: "https://miapatna.vercel.app/logo.png",
@@ -41,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ignius Paramedical College | Patna",
-    description: "Quality paramedical education in Patna. BMLT, DMLT, BPT, BOTT courses with globally recognized certificates."
+    title: "Ignius Paramedical College | Best Paramedical Institute in Patna",
+    description: "Best Paramedical College in Patna. BMLT, DMLT, BPT, BOTT courses with globally recognized certificates."
   },
   robots: "index, follow",
   metadataBase: new URL("https://miapatna.vercel.app"),
@@ -56,12 +57,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-display bg-background-light text-base-content min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <FloatingWhatsApp />
+        <AOSProvider>
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <FloatingWhatsApp />
+        </AOSProvider>
       </body>
     </html>
   );

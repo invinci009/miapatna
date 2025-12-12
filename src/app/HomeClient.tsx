@@ -5,6 +5,8 @@ import Section from '@/components/ui/Section';
 import FacilityGrid from '@/components/ui/FacilityGrid';
 import QuickLinksGrid from '@/components/ui/QuickLinksGrid';
 import ContactForm from '@/components/ui/ContactForm';
+import TestimonialCarousel from '@/components/ui/TestimonialCarousel';
+import GoogleMapEmbed from '@/components/ui/GoogleMapEmbed';
 import { schoolInfo, leadership, instituteOverview, placementStats } from '@/data/leadership';
 import { courses } from '@/data/courses';
 
@@ -297,6 +299,31 @@ export default function Home() {
             >
                 <div className="absolute inset-0">
                     <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/2 translate-y-1/2"></div>
+                </div>
+            </Section>
+
+            {/* TESTIMONIALS SECTION */}
+            <Section
+                className="bg-base-100"
+                title="What Our Students Say"
+                subtitle="Hear from our alumni about their experience at IPC"
+            >
+                <TestimonialCarousel />
+            </Section>
+
+            {/* LOCATION SECTION */}
+            <Section
+                title="Visit Our Campus"
+                subtitle="Located in the heart of Patna, Bihar"
+            >
+                <GoogleMapEmbed />
+            </Section>
+
+            {/* CONTACT CTA */}
+            <Section className="bg-gradient-to-br from-primary via-primary-700 to-primary-900 relative overflow-hidden" dark>
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
                     <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/2 translate-y-1/2"></div>
                 </div>
                 <div className="text-center max-w-2xl mx-auto relative z-10">
