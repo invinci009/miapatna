@@ -5,38 +5,38 @@ import { useState, useEffect } from 'react';
 const testimonials = [
     {
         id: 1,
-        name: 'Priya Sharma',
-        course: 'BMLT Graduate',
+        name: 'Priya Kumari',
+        course: 'BMLT',
         year: '2023',
         rating: 5,
-        text: 'Ignius Paramedical College transformed my career. The practical training in pathology labs and placement support helped me secure a job at a leading diagnostic center in Patna.',
+        text: 'Honestly, I was nervous about joining a paramedical course. But the teachers here made everything so simple. The lab sessions were my favorite - we got to work with real equipment from day one. Now I\'m working at Mahavir Cancer Sansthan. Still can\'t believe it!',
         image: '/avatar-placeholder.png',
     },
     {
         id: 2,
-        name: 'Rahul Kumar',
-        course: 'DMLT Graduate',
+        name: 'Rahul Sharma',
+        course: 'DMLT',
         year: '2022',
         rating: 5,
-        text: 'The faculty here is exceptional. They focus on hands-on learning which prepared me well for the healthcare industry. I now work at AIIMS Patna.',
+        text: 'My father wanted me to study here because his friend\'s son got a good job after graduating. I was skeptical at first, but the placement cell actually helped me get interviews. Got placed at a diagnostic center in Boring Road within 2 months of finishing.',
         image: '/avatar-placeholder.png',
     },
     {
         id: 3,
-        name: 'Sneha Gupta',
-        course: 'BPT Graduate',
+        name: 'Anjali Devi',
+        course: 'BPT',
         year: '2023',
         rating: 5,
-        text: 'Best decision of my life! The physiotherapy program here is comprehensive. State-of-the-art equipment and caring professors made learning enjoyable.',
+        text: 'The physio department is amazing. We had so many hospital visits and practical training sessions. Some of my batchmates are now running their own clinics! The course was tough but worth it.',
         image: '/avatar-placeholder.png',
     },
     {
         id: 4,
-        name: 'Amit Verma',
-        course: 'BOTT Graduate',
+        name: 'Mohammad Arif',
+        course: 'BOTT',
         year: '2022',
         rating: 5,
-        text: 'From classroom to operation theatre - the journey was incredible. The clinical exposure at partner hospitals in Patna gave me real-world experience.',
+        text: 'Coming from a small village near Vaishali, I didn\'t know what to expect. The hostel facility helped a lot. Teachers were patient with us and explained everything in Hindi when needed. Now working at Indira Gandhi Institute. My family is so proud.',
         image: '/avatar-placeholder.png',
     },
 ];
@@ -143,8 +143,8 @@ export default function TestimonialCarousel() {
                         key={index}
                         onClick={() => goToSlide(index)}
                         className={`w-3 h-3 rounded-full transition-all ${index === currentIndex
-                                ? 'bg-primary w-8'
-                                : 'bg-gray-300 hover:bg-gray-400'
+                            ? 'bg-primary w-8'
+                            : 'bg-gray-300 hover:bg-gray-400'
                             }`}
                         aria-label={`Go to testimonial ${index + 1}`}
                     />

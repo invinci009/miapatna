@@ -12,17 +12,17 @@ export interface Leader {
 export const leadership: Leader[] = [
     {
         id: "1",
-        name: "Director",
+        name: "Our Director",
         designation: "Founder & Director",
-        qualification: "Healthcare & Education Expert",
-        message: "At Ignius Paramedical College, we believe in the power of education to transform lives. With state-of-the-art facilities, experienced instructors, and a commitment to excellence, we strive to help every student achieve their career goals and unlock their full potential."
+        qualification: "25+ Years in Education",
+        message: "When I started this college, many people asked why Patna needs another paramedical institute. My answer was simple - because our students deserve quality education close to home. I've seen students from small villages become successful lab technicians, physiotherapists, and healthcare professionals. That's what keeps us going."
     },
     {
         id: "2",
-        name: "Academic Team",
-        designation: "Faculty & Mentors",
-        qualification: "Highly Qualified Professionals",
-        message: "Our faculty is incredibly supportive and knowledgeable, truly caring about student success. We bring together dedicated educators across various disciplines to provide transformative educational experiences."
+        name: "Teaching Team",
+        designation: "Faculty & Staff",
+        qualification: "Experienced Professionals",
+        message: "We're not just teachers reading from textbooks. Most of us have worked in hospitals and labs. We teach what we've practiced. When a student struggles, we stay after class. When they succeed, we celebrate with them. That's just how we do things here."
     }
 ];
 
@@ -127,17 +127,17 @@ export const schoolInfo = {
 
 // Institute Overview
 export const instituteOverview = {
-    description: "Ignius Paramedical College, a proud unit of Ignius Foundation, was established with a mission to bridge the gap between education and employability. We are committed to providing high-quality, industry-relevant training that equips individuals with the practical skills needed to thrive in today's job market. Our programs are designed in collaboration with industry experts, ensuring that the training we provide is both up-to-date and aligned with current professional demands.",
-    mission: "To empower individuals with skills and knowledge for today's job market through high-quality, industry-relevant training that bridges the gap between education and employability.",
-    vision: "To be a leading educational institution that inspires lifelong learning, nurturing critical thinking, creativity, and ethical values while preparing students for real-world challenges.",
+    description: "We started Ignius Paramedical College in 2000 with a simple goal - help students from Bihar get quality healthcare education without going far from home. Over the years, we've trained more than 2000 students, many of whom now work in top hospitals across Patna and beyond. Our focus has always been on practical training because we believe you learn best by doing, not just reading from books.",
+    mission: "To give students from Bihar and nearby areas the skills they need to build successful careers in healthcare - with hands-on training, supportive teachers, and real job opportunities.",
+    vision: "We want to be the college that parents trust and students recommend to their friends. A place where anyone with the willingness to learn can build a future in healthcare.",
     values: [
-        "Innovation & Research",
-        "Academic Excellence",
-        "Industry Relevance",
-        "Student Success",
-        "Ethical Practice"
+        "Practical Learning First",
+        "Affordable Quality Education",
+        "Local Jobs, Real Opportunities",
+        "Every Student Matters",
+        "Honest Guidance"
     ],
-    motto: "Empowering Minds, Shaping Futures"
+    motto: "Siksha Se Safalta Tak"
 };
 
 // Partner Organizations
