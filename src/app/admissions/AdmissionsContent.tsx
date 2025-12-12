@@ -39,38 +39,38 @@ export default function Admissions() {
     return (
         <>
             {/* Hero Section */}
-            <div className="relative bg-gradient-to-br from-primary via-primary-700 to-primary-900 py-20 md:py-28 overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+            <div className="relative bg-white py-20 md:py-28 overflow-hidden border-b border-gray-100">
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute top-10 left-10 w-40 h-40 bg-primary rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-10 right-10 w-60 h-60 bg-primary rounded-full blur-3xl"></div>
                 </div>
 
                 <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-sm font-medium mb-6 border border-white/30">
+                    <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-6 py-3 rounded-full text-sm font-medium mb-6 border border-primary/20">
                         <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                         </span>
                         <span className="font-bold">Admissions Open for 2025-26</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-white mb-6">
+                    <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-neutral mb-6">
                         Join {schoolInfo.shortName}
                     </h1>
-                    <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto mb-8">
+                    <p className="text-subtle-light text-lg md:text-xl max-w-3xl mx-auto mb-8">
                         Start your healthcare career with quality education, expert faculty, and globally recognized certificates.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button
                             onClick={() => setActiveTab('apply')}
-                            className="w-full sm:w-auto bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-gray-100 hover:scale-105 transition-all shadow-xl"
+                            className="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-full font-bold hover:bg-primary-focus hover:scale-105 transition-all shadow-lg"
                         >
                             Apply Online Now
                         </button>
                         <button
                             onClick={() => setActiveTab('enquiry')}
-                            className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-2 border-white/50 px-8 py-4 rounded-full font-bold hover:bg-white/30 transition-all"
+                            className="w-full sm:w-auto bg-gray-100 text-neutral border border-gray-200 px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-all"
                         >
                             Make an Enquiry
                         </button>
