@@ -160,19 +160,19 @@ export default function Admissions() {
                             </button>
                             <button
                                 onClick={() => setActiveTab('process')}
-                                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all text-left group border-l-4 border-secondary"
+                                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all text-left group border-l-4 border-primary"
                             >
                                 <h3 className="text-xl font-bold text-neutral mb-2">Admission Process</h3>
                                 <p className="text-subtle-light text-sm mb-4">Simple steps to get admitted</p>
-                                <span className="text-secondary font-medium group-hover:underline">View Process →</span>
+                                <span className="text-primary font-medium group-hover:underline">View Process →</span>
                             </button>
                             <button
                                 onClick={() => setActiveTab('documents')}
-                                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all text-left group border-l-4 border-accent"
+                                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all text-left group border-l-4 border-primary"
                             >
                                 <h3 className="text-xl font-bold text-neutral mb-2">Required Documents</h3>
                                 <p className="text-subtle-light text-sm mb-4">Documents needed for admission</p>
-                                <span className="text-accent font-medium group-hover:underline">View Documents →</span>
+                                <span className="text-primary font-medium group-hover:underline">View Documents →</span>
                             </button>
                         </div>
                     </Section>
