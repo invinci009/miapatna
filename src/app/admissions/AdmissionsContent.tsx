@@ -39,7 +39,7 @@ export default function Admissions() {
     return (
         <>
             {/* Hero Section */}
-            <div className="relative bg-gradient-to-br from-primary via-primary-focus to-secondary py-20 md:py-28 overflow-hidden">
+            <div className="relative bg-gradient-to-br from-primary via-primary-700 to-primary-900 py-20 md:py-28 overflow-hidden">
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
                     <div className="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
