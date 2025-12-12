@@ -7,6 +7,7 @@ import QuickLinksGrid from '@/components/ui/QuickLinksGrid';
 import ContactForm from '@/components/ui/ContactForm';
 import TestimonialCarousel from '@/components/ui/TestimonialCarousel';
 import LeafletMap from '@/components/ui/LeafletMap';
+import GalleryPreview from '@/components/ui/GalleryPreview';
 import AdmissionBanner from '@/components/ui/AdmissionBanner';
 import { schoolInfo, leadership, instituteOverview, placementStats } from '@/data/leadership';
 import { courses } from '@/data/courses';
@@ -313,12 +314,13 @@ export default function Home() {
                 <TestimonialCarousel />
             </Section>
 
-            {/* LOCATION SECTION */}
+            {/* GALLERY SECTION */}
             <Section
-                title="Visit Our Campus"
-                subtitle="Located in the heart of Patna, Bihar"
+                className="bg-base-100"
+                title="Campus Life"
+                subtitle="A glimpse into life at Ignius Paramedical College"
             >
-                <LeafletMap />
+                <GalleryPreview />
             </Section>
 
             {/* CONTACT CTA */}
