@@ -1,6 +1,7 @@
 'use client';
 import Section from '@/components/ui/Section';
 import ContactForm from '@/components/ui/ContactForm';
+import LeafletMap from '@/components/ui/LeafletMap';
 import { schoolInfo } from '@/data/leadership';
 
 export default function Contact() {
@@ -94,18 +95,7 @@ export default function Contact() {
                     {/* Map */}
                     <div>
                         <h3 className="text-2xl font-heading font-bold text-neutral mb-6">Find Us</h3>
-                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-[400px]">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.0!2d85.069!3d25.573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDM0JzIzLjAiTiA4NcKwMDQnMDguMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                                title="Ignius Paramedical College Location"
-                            ></iframe>
-                        </div>
+                        <LeafletMap />
 
                         {/* Quick Contact */}
                         <div className="mt-6 bg-white rounded-xl p-6 shadow-md">
