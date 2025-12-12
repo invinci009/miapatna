@@ -367,9 +367,6 @@ export default function Home() {
                     </div>
                 </div>
             )}
-
-            {/* Floating Admission Banner */}
-            <AdmissionBanner variant="floating" />
         </>
     );
 }
