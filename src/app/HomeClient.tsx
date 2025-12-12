@@ -6,7 +6,8 @@ import FacilityGrid from '@/components/ui/FacilityGrid';
 import QuickLinksGrid from '@/components/ui/QuickLinksGrid';
 import ContactForm from '@/components/ui/ContactForm';
 import TestimonialCarousel from '@/components/ui/TestimonialCarousel';
-import GoogleMapEmbed from '@/components/ui/GoogleMapEmbed';
+import LeafletMap from '@/components/ui/LeafletMap';
+import AdmissionBanner from '@/components/ui/AdmissionBanner';
 import { schoolInfo, leadership, instituteOverview, placementStats } from '@/data/leadership';
 import { courses } from '@/data/courses';
 
@@ -317,7 +318,7 @@ export default function Home() {
                 title="Visit Our Campus"
                 subtitle="Located in the heart of Patna, Bihar"
             >
-                <GoogleMapEmbed />
+                <LeafletMap />
             </Section>
 
             {/* CONTACT CTA */}
@@ -366,6 +367,9 @@ export default function Home() {
                     </div>
                 </div>
             )}
+
+            {/* Floating Admission Banner */}
+            <AdmissionBanner variant="floating" />
         </>
     );
 }
