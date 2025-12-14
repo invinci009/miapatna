@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Section from '@/components/ui/Section';
 import ContactForm from '@/components/ui/ContactForm';
 import AdmissionForm from '@/components/ui/AdmissionForm';
@@ -26,6 +26,16 @@ const whyChooseUs = [
 
 export default function Admissions() {
     const [activeTab, setActiveTab] = useState('overview');
+    const formSectionRef = useRef<HTMLDivElement>(null);
+
+    // Scroll to form when switching to apply or enquiry tabs
+    useEffect(() => {
+        if ((activeTab === 'apply' || activeTab === 'enquiry') && formSectionRef.current) {
+            setTimeout(() => {
+                formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [activeTab]);
 
     const tabs = [
         { id: 'overview', label: 'Overview' },
@@ -81,7 +91,7 @@ export default function Admissions() {
             {/* Tab Navigation */}
             <div className="bg-white border-b border-base-200 sticky top-16 md:top-20 z-40 shadow-sm">
                 <div className="container mx-auto px-4">
-                    <div className="flex overflow-x-auto gap-1 py-3 scrollbar-hide">
+                    <div className="flex overflow-x-auto gap-1 py-3 scrollbar-hide justify-center">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
@@ -181,23 +191,25 @@ export default function Admissions() {
 
             {/* Apply Now Tab */}
             {activeTab === 'apply' && (
-                <Section
-                    title="Online Admission Application"
-                    subtitle="Complete the form below to submit your admission application"
-                >
-                    <div className="max-w-4xl mx-auto">
-                        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-8">
-                            <h4 className="font-bold text-blue-800 mb-2">How it works</h4>
-                            <ul className="text-blue-700 text-sm space-y-1">
-                                <li>• Fill all required fields marked with *</li>
-                                <li>• You'll receive a confirmation with application reference</li>
-                                <li>• Our team will contact you within 2-3 working days</li>
-                                <li>• Bring original documents during campus visit</li>
-                            </ul>
+                <div ref={formSectionRef}>
+                    <Section
+                        title="Online Admission Application"
+                        subtitle="Complete the form below to submit your admission application"
+                    >
+                        <div className="max-w-4xl mx-auto">
+                            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-8">
+                                <h4 className="font-bold text-blue-800 mb-2">How it works</h4>
+                                <ul className="text-blue-700 text-sm space-y-1">
+                                    <li>• Fill all required fields marked with *</li>
+                                    <li>• You'll receive a confirmation with application reference</li>
+                                    <li>• Our team will contact you within 2-3 working days</li>
+                                    <li>• Bring original documents during campus visit</li>
+                                </ul>
+                            </div>
+                            <AdmissionForm />
                         </div>
-                        <AdmissionForm />
-                    </div>
-                </Section>
+                    </Section>
+                </div>
             )}
 
             {/* Courses Tab */}
@@ -345,34 +357,36 @@ export default function Admissions() {
 
             {/* Enquiry Tab */}
             {activeTab === 'enquiry' && (
-                <Section
-                    title="Admission Enquiry"
-                    subtitle="Have questions? We're here to help!"
-                >
-                    <div className="max-w-3xl mx-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                            <div className="bg-gradient-to-br from-primary to-primary-focus rounded-2xl p-6 text-white">
-                                <h4 className="font-bold text-lg mb-2">Call / WhatsApp</h4>
-                                <p className="text-white/80 text-sm mb-4">Mon-Sat, 9:00 AM - 5:00 PM</p>
-                                <a href={`tel:${schoolInfo.contact.phone[0]}`} className="text-xl font-bold hover:underline">
-                                    {schoolInfo.contact.phone[0]}
-                                </a>
+                <div ref={formSectionRef}>
+                    <Section
+                        title="Admission Enquiry"
+                        subtitle="Have questions? We're here to help!"
+                    >
+                        <div className="max-w-3xl mx-auto">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                <div className="bg-gradient-to-br from-primary to-primary-focus rounded-2xl p-6 text-white">
+                                    <h4 className="font-bold text-lg mb-2">Call / WhatsApp</h4>
+                                    <p className="text-white/80 text-sm mb-4">Mon-Sat, 9:00 AM - 5:00 PM</p>
+                                    <a href={`tel:${schoolInfo.contact.phone[0]}`} className="text-xl font-bold hover:underline">
+                                        {schoolInfo.contact.phone[0]}
+                                    </a>
+                                </div>
+                                <div className="bg-gradient-to-br from-secondary to-secondary-focus rounded-2xl p-6 text-white">
+                                    <h4 className="font-bold text-lg mb-2">Email Us</h4>
+                                    <p className="text-white/80 text-sm mb-4">We'll respond within 24 hours</p>
+                                    <a href={`mailto:${schoolInfo.contact.email}`} className="text-lg font-bold hover:underline">
+                                        {schoolInfo.contact.email}
+                                    </a>
+                                </div>
                             </div>
-                            <div className="bg-gradient-to-br from-secondary to-secondary-focus rounded-2xl p-6 text-white">
-                                <h4 className="font-bold text-lg mb-2">Email Us</h4>
-                                <p className="text-white/80 text-sm mb-4">We'll respond within 24 hours</p>
-                                <a href={`mailto:${schoolInfo.contact.email}`} className="text-lg font-bold hover:underline">
-                                    {schoolInfo.contact.email}
-                                </a>
-                            </div>
-                        </div>
 
-                        <div className="bg-white rounded-2xl p-8 shadow-xl">
-                            <h3 className="text-xl font-bold text-neutral mb-6">Send us a Message</h3>
-                            <ContactForm />
+                            <div className="bg-white rounded-2xl p-8 shadow-xl">
+                                <h3 className="text-xl font-bold text-neutral mb-6">Send us a Message</h3>
+                                <ContactForm />
+                            </div>
                         </div>
-                    </div>
-                </Section>
+                    </Section>
+                </div>
             )}
         </>
     );
