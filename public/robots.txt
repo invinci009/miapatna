@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://miapatna.vercel.app/sitemap.xml
+
+# Disallow admin/private paths (if any)
+Disallow: /api/

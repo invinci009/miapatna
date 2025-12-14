@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import Section from '@/components/ui/Section';
 import { courses, howToApply } from '@/data/courses';
 import { schoolInfo } from '@/data/leadership';
+import { CourseJsonLd } from '@/components/seo/JsonLd';
 
 export default function CourseDetailContent() {
     const params = useParams();
@@ -39,6 +40,15 @@ export default function CourseDetailContent() {
 
     return (
         <>
+            {/* Course Schema JSON-LD for SEO */}
+            <CourseJsonLd
+                courseName={course.name}
+                courseCode={course.shortName}
+                description={course.description || ''}
+                duration={course.duration}
+                eligibility={course.eligibility}
+            />
+
             {/* Hero Section */}
             <div className={`relative overflow-hidden bg-gradient-to-br ${colors.gradient} py-20 lg:py-28`}>
                 <div className="absolute inset-0 overflow-hidden">
