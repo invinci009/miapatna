@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import { schoolInfo } from '@/data/leadership';
 
 export const metadata: Metadata = {
-    title: 'Public Disclosure',
-    description: 'Mandatory public disclosure information for Ignius Paramedical College as per regulatory requirements.',
+    title: 'Public Disclosure - Mandatory Information',
+    description: 'Mandatory public disclosure information for IPC Patna - Ignius Paramedical College as per regulatory requirements. Affiliation, recognition, and institute details.',
+    robots: 'index, follow',
 };
 
 export default function PublicDisclosure() {

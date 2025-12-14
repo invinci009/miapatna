@@ -36,12 +36,24 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Ignius Paramedical College | Best Paramedical Institute in Patna",
-    template: "%s | Ignius Paramedical College"
+    default: "IPC Patna | Ignius Paramedical College - Best Healthcare Institute in Bihar",
+    template: "%s | IPC Patna - Ignius Paramedical College"
   },
-  description: "Best Paramedical College in Patna, Bihar. Ignius Paramedical College offers BMLT, DMLT, BPT, BOTT courses with globally recognized certificates. 2000+ students trained since 2000.",
-  keywords: ["Best Paramedical College Patna", "Ignius Paramedical College", "IPC", "paramedical institute Patna", "BMLT course Bihar", "DMLT Patna", "BPT course", "healthcare education Bihar"],
-  authors: [{ name: "Ignius Paramedical College" }],
+  description: "Ignius Paramedical College (IPC) Patna - Bihar's leading paramedical institute. Offering BMLT, DMLT, BPT, BOTT courses with 100% placement assistance. 2000+ trained healthcare professionals since 2018.",
+  keywords: [
+    "IPC Patna",
+    "Ignius Paramedical College",
+    "Best Paramedical College Patna",
+    "BMLT course Bihar",
+    "DMLT Patna",
+    "BPT course Bihar",
+    "BOTT course",
+    "healthcare education Bihar",
+    "paramedical institute Patna",
+    "medical lab technician course",
+    "physiotherapy college Patna"
+  ],
+  authors: [{ name: "Ignius Paramedical College", url: "https://miapatna.vercel.app" }],
   creator: "Ignius Paramedical College",
   publisher: "Ignius Paramedical College",
   formatDetection: {
@@ -49,25 +61,36 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
+  icons: {
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/logo.png',
+  },
   openGraph: {
     type: "website",
     url: "https://miapatna.vercel.app/",
-    title: "Ignius Paramedical College | Best Paramedical Institute in Patna",
-    description: "Best Paramedical College in Patna. BMLT, DMLT, BPT, BOTT courses with globally recognized certificates. 2000+ students trained.",
-    siteName: "Ignius Paramedical College",
+    title: "IPC Patna | Ignius Paramedical College - Best Healthcare Institute",
+    description: "Bihar's leading paramedical institute. BMLT, DMLT, BPT, BOTT courses with 100% placement assistance. Join 2000+ trained healthcare professionals.",
+    siteName: "IPC Patna - Ignius Paramedical College",
     locale: "en_IN",
     images: [{
       url: "https://miapatna.vercel.app/logo.png",
       width: 1200,
       height: 630,
-      alt: "Ignius Paramedical College Logo"
+      alt: "IPC Patna - Ignius Paramedical College Logo"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ignius Paramedical College | Best Paramedical Institute in Patna",
-    description: "Best Paramedical College in Patna. BMLT, DMLT, BPT, BOTT courses with globally recognized certificates.",
-    images: ["https://miapatna.vercel.app/logo.png"]
+    title: "IPC Patna | Ignius Paramedical College",
+    description: "Bihar's leading paramedical institute. BMLT, DMLT, BPT, BOTT courses with placement assistance.",
+    images: ["https://miapatna.vercel.app/logo.png"],
+    creator: "@ipcpatna"
   },
   robots: {
     index: true,
