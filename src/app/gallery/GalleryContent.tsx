@@ -41,13 +41,31 @@ export default function Gallery() {
 
     return (
         <>
-            {/* Page Hero */}
-            <div className="bg-gradient-to-br from-pink-500 to-purple-600 py-16 md:py-24">
-                <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-                    <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+            {/* Page Hero - Creative green with clean white frames */}
+            <div className="relative bg-accent overflow-hidden py-20 md:py-28">
+                {/* White frame elements - representing photos */}
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute top-8 left-[8%] w-16 h-20 bg-white/15 rounded shadow-lg rotate-[-8deg]"></div>
+                    <div className="absolute top-12 right-[10%] w-14 h-18 bg-white/15 rounded shadow-lg rotate-[10deg]"></div>
+                    <div className="absolute bottom-16 left-[15%] w-20 h-24 bg-white/15 rounded shadow-lg rotate-[5deg]"></div>
+                    <div className="absolute bottom-12 right-[18%] w-16 h-20 bg-white/15 rounded shadow-lg rotate-[-6deg]"></div>
+                </div>
+
+                {/* Concentric circles - camera lens effect */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10">
+                    <div className="w-[400px] h-[400px] rounded-full border-[3px] border-white"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full border-[2px] border-white"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full border-[2px] border-white"></div>
+                </div>
+
+                <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center relative z-10">
+                    <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 bg-white/15 backdrop-blur-sm rounded-full border border-white/25">
+                        <span className="text-white text-sm font-medium">Campus Memories</span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">
                         Photo Gallery
                     </h1>
-                    <p className="text-white/80 text-lg max-w-2xl mx-auto">
+                    <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto font-light">
                         Glimpses of campus life, events, and activities at MIA
                     </p>
                 </div>
@@ -62,8 +80,8 @@ export default function Gallery() {
                                 key={category.id}
                                 onClick={() => setActiveCategory(category.id)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeCategory === category.id
-                                        ? 'bg-primary text-white'
-                                        : 'bg-base-200 text-subtle-light hover:bg-base-300'
+                                    ? 'bg-accent text-white'
+                                    : 'bg-base-200 text-subtle-light hover:bg-base-300'
                                     }`}
                             >
                                 {category.label}
@@ -79,7 +97,7 @@ export default function Gallery() {
                     {filteredItems.map((item) => (
                         <div
                             key={item.id}
-                            className="group relative aspect-square bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+                            className="group relative aspect-square bg-gradient-to-br from-accent/10 to-emerald-100 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
                         >
                             {/* Placeholder icon */}
                             <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-300">
@@ -99,7 +117,6 @@ export default function Gallery() {
 
                 {filteredItems.length === 0 && (
                     <div className="text-center py-12">
-                        <div className="text-6xl mb-4">📷</div>
                         <p className="text-subtle-light">No photos in this category yet.</p>
                     </div>
                 )}
@@ -109,7 +126,6 @@ export default function Gallery() {
             <Section className="bg-base-200">
                 <div className="max-w-2xl mx-auto text-center">
                     <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <div className="text-4xl mb-4">📸</div>
                         <h3 className="text-xl font-bold text-neutral mb-3">Placeholder Gallery</h3>
                         <p className="text-subtle-light">
                             This gallery currently shows placeholder content. Actual photos of MIA campus,
@@ -122,4 +138,3 @@ export default function Gallery() {
         </>
     );
 }
-

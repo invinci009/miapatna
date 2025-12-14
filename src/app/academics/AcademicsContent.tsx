@@ -7,13 +7,28 @@ import { schoolInfo, instituteOverview, faculty } from '@/data/leadership';
 export default function Academics() {
     return (
         <>
-            {/* Page Hero */}
-            <div className="bg-gradient-to-br from-primary to-secondary py-16 md:py-24">
-                <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-                    <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+            {/* Page Hero - Warm amber with clean white elements */}
+            <div className="relative bg-secondary overflow-hidden py-20 md:py-28">
+                {/* White geometric shapes */}
+                <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full translate-x-1/3 -translate-y-1/3"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/3 translate-y-1/3"></div>
+
+                {/* Ascending bars representing growth */}
+                <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center gap-3 md:gap-6 px-8 pb-0">
+                    {[30, 45, 60, 80, 100, 80, 60, 45, 30].map((height, i) => (
+                        <div key={i} className="bg-white/15 rounded-t-sm" style={{ width: '4%', maxWidth: '40px', height: `${height * 0.8}px` }}></div>
+                    ))}
+                </div>
+
+                <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center relative z-10">
+                    <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 bg-white/15 backdrop-blur-sm rounded-full border border-white/25">
+                        <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        <span className="text-slate-900 text-sm font-medium">Admissions Open</span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-slate-900 mb-4">
                         Courses & Programs
                     </h1>
-                    <p className="text-white/80 text-lg max-w-2xl mx-auto">
+                    <p className="text-slate-800/80 text-lg md:text-xl max-w-2xl mx-auto font-light">
                         Industry-relevant healthcare education for a successful career
                     </p>
                 </div>
@@ -189,7 +204,7 @@ export default function Academics() {
             </Section>
 
             {/* CTA */}
-            <Section className="bg-gradient-to-br from-primary to-primary-focus" dark>
+            <Section className="bg-primary" dark>
                 <div className="text-center max-w-2xl mx-auto">
                     <h2 className="text-3xl font-heading font-bold text-white mb-4">
                         Ready to Start Your Healthcare Career?
@@ -216,4 +231,3 @@ export default function Academics() {
         </>
     );
 }
-

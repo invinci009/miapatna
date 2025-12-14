@@ -7,13 +7,32 @@ import { schoolInfo } from '@/data/leadership';
 export default function Contact() {
     return (
         <>
-            {/* Page Hero */}
-            <div className="bg-gradient-to-br from-primary to-accent py-16 md:py-24">
-                <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-                    <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+            {/* Page Hero - Professional blue with wave and white accents */}
+            <div className="relative bg-gradient-to-br from-primary via-blue-600 to-primary-focus overflow-hidden py-20 md:py-28">
+                {/* White wave at bottom */}
+                <div className="absolute bottom-0 left-0 right-0">
+                    <svg viewBox="0 0 1440 120" className="w-full h-auto fill-white">
+                        <path d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+                    </svg>
+                </div>
+
+                {/* White decorative elements */}
+                <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute top-1/3 right-0 w-48 h-48 bg-white/10 rounded-full translate-x-1/2"></div>
+                <div className="absolute bottom-1/4 left-1/4 w-32 h-32 bg-white/5 rounded-full"></div>
+
+                {/* Subtle grid pattern */}
+                <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
+
+                <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center relative z-10">
+                    <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 bg-white/15 backdrop-blur-sm rounded-full border border-white/25">
+                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span className="text-white text-sm font-medium">We're here to help</span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">
                         Contact Us
                     </h1>
-                    <p className="text-white/80 text-lg max-w-2xl mx-auto">
+                    <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto font-light">
                         We'd love to hear from you. Get in touch for admission enquiries or any questions.
                     </p>
                 </div>
@@ -181,4 +200,3 @@ export default function Contact() {
         </>
     );
 }
-
