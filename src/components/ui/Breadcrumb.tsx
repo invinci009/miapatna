@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { courses } from '@/data/courses';
 
 interface BreadcrumbItem {
     label: string;
@@ -38,15 +39,28 @@ export default function Breadcrumb() {
 
         // Get label from map or capitalize segment
         let label = pathLabels[segment] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+        let href = currentPath;
 
-        // For course detail pages, just show the course ID or name
-        if (pathSegments[0] === 'courses' && index === 1) {
-            label = `Course ${segment}`;
+        // For course pages, redirect /courses to /academics since /courses is not a valid page
+        if (pathSegments[0] === 'courses') {
+            if (index === 0) {
+                // Replace "Courses" link with "Courses & Programs" linking to /academics
+                label = 'Courses & Programs';
+                href = '/academics';
+            } else if (index === 1) {
+                // Look up the actual course name for the course detail page
+                const course = courses.find(c => c.id === segment);
+                if (course) {
+                    label = course.shortName;
+                } else {
+                    label = segment.toUpperCase();
+                }
+            }
         }
 
         breadcrumbItems.push({
             label,
-            href: currentPath
+            href
         });
     });
 

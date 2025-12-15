@@ -91,12 +91,12 @@ export default function Admissions() {
             {/* Tab Navigation */}
             <div className="bg-white border-b border-base-200 sticky top-16 md:top-20 z-40 shadow-sm">
                 <div className="container mx-auto px-4">
-                    <div className="flex overflow-x-auto gap-1 py-3 scrollbar-hide justify-center">
+                    <div className="flex overflow-x-auto gap-2 py-3 scrollbar-hide md:justify-center pl-1">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${activeTab === tab.id
+                                className={`px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all flex-shrink-0 ${activeTab === tab.id
                                     ? 'bg-primary text-white shadow-lg'
                                     : 'bg-base-100 text-subtle-light hover:bg-base-200'
                                     }`}

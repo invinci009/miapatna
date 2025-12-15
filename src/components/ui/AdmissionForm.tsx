@@ -60,6 +60,64 @@ export default function AdmissionForm() {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const formRef = useRef<HTMLFormElement>(null);
 
+    // Separate state for DOB parts to show partial selections
+    const [dobDay, setDobDay] = useState('');
+    const [dobMonth, setDobMonth] = useState('');
+    const [dobYear, setDobYear] = useState('');
+
+    // Pincode lookup state
+    const [pincodeLoading, setPincodeLoading] = useState(false);
+    const [pincodeValid, setPincodeValid] = useState<boolean | null>(null);
+
+    // Helper function to get days in a month
+    const getDaysInMonth = (month: string, year: string) => {
+        if (!month) return 31;
+        const monthNum = parseInt(month, 10);
+        const yearNum = year ? parseInt(year, 10) : new Date().getFullYear();
+        return new Date(yearNum, monthNum, 0).getDate();
+    };
+
+    // Update combined DOB when parts change
+    const updateDob = (day: string, month: string, year: string) => {
+        if (day && month && year) {
+            setFormData(prev => ({ ...prev, dateOfBirth: `${year}-${month}-${day}` }));
+        }
+        if (errors.dateOfBirth) setErrors(prev => ({ ...prev, dateOfBirth: '' }));
+    };
+
+    // Fetch city and state from pincode
+    const fetchPincodeData = async (pincode: string) => {
+        if (pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
+            setPincodeValid(null);
+            return;
+        }
+
+        setPincodeLoading(true);
+        setPincodeValid(null);
+
+        try {
+            const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+            const data = await response.json();
+
+            if (data[0]?.Status === 'Success' && data[0]?.PostOffice?.length > 0) {
+                const postOffice = data[0].PostOffice[0];
+                setFormData(prev => ({
+                    ...prev,
+                    city: postOffice.District || postOffice.Block || '',
+                    state: postOffice.State || ''
+                }));
+                setPincodeValid(true);
+                if (errors.city) setErrors(prev => ({ ...prev, city: '' }));
+            } else {
+                setPincodeValid(false);
+            }
+        } catch {
+            setPincodeValid(false);
+        } finally {
+            setPincodeLoading(false);
+        }
+    };
+
     const totalSteps = 4;
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -260,13 +318,78 @@ export default function AdmissionForm() {
                                 <label className="block text-sm font-semibold text-neutral mb-2">
                                     Date of Birth <span className="text-red-500">*</span>
                                 </label>
-                                <input
-                                    type="date"
-                                    name="dateOfBirth"
-                                    value={formData.dateOfBirth}
-                                    onChange={handleChange}
-                                    className={`w-full px-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none ${errors.dateOfBirth ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
-                                />
+                                <div className={`flex items-center gap-1 p-1.5 bg-gray-50 border rounded-xl transition-all ${errors.dateOfBirth ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}>
+                                    <div className="relative flex-1">
+                                        <select
+                                            name="dobDay"
+                                            value={dobDay}
+                                            onChange={(e) => {
+                                                const day = e.target.value;
+                                                setDobDay(day);
+                                                updateDob(day, dobMonth, dobYear);
+                                            }}
+                                            className="w-full px-3 py-2.5 bg-white border border-gray-100 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none appearance-none cursor-pointer text-center font-medium text-neutral"
+                                        >
+                                            <option value="">DD</option>
+                                            {Array.from({ length: getDaysInMonth(dobMonth, dobYear) }, (_, i) => i + 1).map(d => (
+                                                <option key={d} value={String(d).padStart(2, '0')}>{String(d).padStart(2, '0')}</option>
+                                            ))}
+                                        </select>
+                                        <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                        </div>
+                                    </div>
+                                    <span className="text-gray-300 font-light">/</span>
+                                    <div className="relative flex-1">
+                                        <select
+                                            name="dobMonth"
+                                            value={dobMonth}
+                                            onChange={(e) => {
+                                                const month = e.target.value;
+                                                setDobMonth(month);
+                                                // Adjust day if it exceeds days in new month
+                                                const maxDays = getDaysInMonth(month, dobYear);
+                                                const adjustedDay = dobDay && parseInt(dobDay) > maxDays ? String(maxDays).padStart(2, '0') : dobDay;
+                                                if (adjustedDay !== dobDay) setDobDay(adjustedDay);
+                                                updateDob(adjustedDay, month, dobYear);
+                                            }}
+                                            className="w-full px-3 py-2.5 bg-white border border-gray-100 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none appearance-none cursor-pointer text-center font-medium text-neutral"
+                                        >
+                                            <option value="">MM</option>
+                                            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((m, i) => (
+                                                <option key={m} value={String(i + 1).padStart(2, '0')}>{m}</option>
+                                            ))}
+                                        </select>
+                                        <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                        </div>
+                                    </div>
+                                    <span className="text-gray-300 font-light">/</span>
+                                    <div className="relative flex-1">
+                                        <select
+                                            name="dobYear"
+                                            value={dobYear}
+                                            onChange={(e) => {
+                                                const year = e.target.value;
+                                                setDobYear(year);
+                                                // Adjust day if leap year changes affect Feb 29
+                                                const maxDays = getDaysInMonth(dobMonth, year);
+                                                const adjustedDay = dobDay && parseInt(dobDay) > maxDays ? String(maxDays).padStart(2, '0') : dobDay;
+                                                if (adjustedDay !== dobDay) setDobDay(adjustedDay);
+                                                updateDob(adjustedDay, dobMonth, year);
+                                            }}
+                                            className="w-full px-3 py-2.5 bg-white border border-gray-100 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none appearance-none cursor-pointer text-center font-medium text-neutral"
+                                        >
+                                            <option value="">YYYY</option>
+                                            {Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - 15 - i).map(y => (
+                                                <option key={y} value={y}>{y}</option>
+                                            ))}
+                                        </select>
+                                        <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                        </div>
+                                    </div>
+                                </div>
                                 {errors.dateOfBirth && <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth}</p>}
                             </div>
                         </div>
@@ -486,41 +609,87 @@ export default function AdmissionForm() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label className="block text-sm font-semibold text-neutral mb-2">
+                                    Pincode <span className="text-red-500">*</span>
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        name="pincode"
+                                        value={formData.pincode}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                                            setFormData(prev => ({ ...prev, pincode: value }));
+                                            if (errors.pincode) setErrors(prev => ({ ...prev, pincode: '' }));
+                                            if (value.length === 6) {
+                                                fetchPincodeData(value);
+                                            } else {
+                                                setPincodeValid(null);
+                                            }
+                                        }}
+                                        placeholder="Enter 6-digit pincode"
+                                        maxLength={6}
+                                        className={`w-full px-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none pr-10 ${errors.pincode ? 'border-red-400 bg-red-50' : pincodeValid === true ? 'border-green-400 bg-green-50' : 'border-gray-200'}`}
+                                    />
+                                    {pincodeLoading && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                                            <svg className="animate-spin h-5 w-5 text-primary" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                            </svg>
+                                        </div>
+                                    )}
+                                    {!pincodeLoading && pincodeValid === true && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                        </div>
+                                    )}
+                                    {!pincodeLoading && pincodeValid === false && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                        </div>
+                                    )}
+                                </div>
+                                {errors.pincode && <p className="text-red-500 text-xs mt-1">{errors.pincode}</p>}
+                                {pincodeValid === false && <p className="text-amber-600 text-xs mt-1">Pincode not found. Please enter city and state manually.</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-neutral mb-2">
                                     City <span className="text-red-500">*</span>
                                 </label>
-                                <input
-                                    type="text"
-                                    name="city"
-                                    value={formData.city}
-                                    onChange={handleChange}
-                                    placeholder="e.g., Patna"
-                                    className={`w-full px-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none ${errors.city ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
-                                />
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={formData.city}
+                                        onChange={handleChange}
+                                        placeholder="Auto-filled from pincode"
+                                        className={`w-full px-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none ${errors.city ? 'border-red-400 bg-red-50' : formData.city && pincodeValid ? 'border-green-400 bg-green-50' : 'border-gray-200'}`}
+                                    />
+                                    {formData.city && pincodeValid && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                        </div>
+                                    )}
+                                </div>
                                 {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
                             </div>
                             <div>
                                 <label className="block text-sm font-semibold text-neutral mb-2">State</label>
-                                <input
-                                    type="text"
-                                    name="state"
-                                    value={formData.state}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-semibold text-neutral mb-2">
-                                    Pincode <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="pincode"
-                                    value={formData.pincode}
-                                    onChange={handleChange}
-                                    placeholder="e.g., 801505"
-                                    className={`w-full px-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none ${errors.pincode ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
-                                />
-                                {errors.pincode && <p className="text-red-500 text-xs mt-1">{errors.pincode}</p>}
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        name="state"
+                                        value={formData.state}
+                                        onChange={handleChange}
+                                        placeholder="Auto-filled from pincode"
+                                        className={`w-full px-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none ${formData.state && pincodeValid ? 'border-green-400 bg-green-50' : 'border-gray-200'}`}
+                                    />
+                                    {formData.state && pincodeValid && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
@@ -561,26 +730,26 @@ export default function AdmissionForm() {
                 {/* Step 4 - Review */}
                 {currentStep === 4 && (
                     <div className="space-y-6">
-                        <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                        <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20 overflow-hidden">
                             <h4 className="font-bold text-primary mb-4 text-lg">Application Summary</h4>
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-3">
                                     <h5 className="font-semibold text-neutral border-b pb-2">Applicant Details</h5>
-                                    <p className="flex justify-between"><span className="text-gray-500">Name:</span> <strong>{formData.studentName}</strong></p>
-                                    <p className="flex justify-between"><span className="text-gray-500">DOB:</span> <strong>{formData.dateOfBirth}</strong></p>
-                                    <p className="flex justify-between"><span className="text-gray-500">Gender:</span> <strong>{formData.gender}</strong></p>
-                                    <p className="flex justify-between"><span className="text-gray-500">Course:</span> <strong className="text-primary">{formData.courseApplied}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">Name:</span> <strong className="break-all">{formData.studentName}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">DOB:</span> <strong>{formData.dateOfBirth}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">Gender:</span> <strong>{formData.gender}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">Course:</span> <strong className="text-primary">{formData.courseApplied}</strong></p>
                                 </div>
                                 <div className="space-y-3">
                                     <h5 className="font-semibold text-neutral border-b pb-2">Guardian Details</h5>
-                                    <p className="flex justify-between"><span className="text-gray-500">Name:</span> <strong>{formData.guardianName}</strong></p>
-                                    <p className="flex justify-between"><span className="text-gray-500">Phone:</span> <strong>{formData.guardianPhone}</strong></p>
-                                    <p className="flex justify-between"><span className="text-gray-500">Email:</span> <strong>{formData.guardianEmail}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">Name:</span> <strong className="break-all">{formData.guardianName}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">Phone:</span> <strong>{formData.guardianPhone}</strong></p>
+                                    <p className="flex flex-col sm:flex-row sm:justify-between gap-1"><span className="text-gray-500">Email:</span> <strong className="break-all">{formData.guardianEmail}</strong></p>
                                 </div>
                             </div>
                             <div className="mt-6 pt-4 border-t border-primary/20">
                                 <h5 className="font-semibold text-neutral mb-2">Address</h5>
-                                <p className="text-gray-700">{formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
+                                <p className="text-gray-700 break-words">{formData.address}, {formData.city}, {formData.state} - {formData.pincode}</p>
                             </div>
                         </div>
 

@@ -122,19 +122,7 @@ export default function Gallery() {
                 )}
             </Section>
 
-            {/* Note about placeholders */}
-            <Section className="bg-base-200">
-                <div className="max-w-2xl mx-auto text-center">
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <h3 className="text-xl font-bold text-neutral mb-3">Placeholder Gallery</h3>
-                        <p className="text-subtle-light">
-                            This gallery currently shows placeholder content. Actual photos of MIA campus,
-                            events, and activities will be added here. Each image will be replaced with
-                            real photographs from the school.
-                        </p>
-                    </div>
-                </div>
-            </Section>
+
         </>
     );
 }
