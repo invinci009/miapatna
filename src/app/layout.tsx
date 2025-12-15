@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
+import AdmissionRibbon from "@/components/ui/AdmissionRibbon";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import AOSProvider from "@/components/providers/AOSProvider";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd";
@@ -145,6 +146,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <FloatingWhatsApp />
+          <AdmissionRibbon />
         </AOSProvider>
       </body>
     </html>

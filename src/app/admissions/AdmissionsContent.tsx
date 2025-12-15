@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Section from '@/components/ui/Section';
 import ContactForm from '@/components/ui/ContactForm';
 import AdmissionForm from '@/components/ui/AdmissionForm';
@@ -25,8 +26,17 @@ const whyChooseUs = [
 ];
 
 export default function Admissions() {
-    const [activeTab, setActiveTab] = useState('overview');
+    const searchParams = useSearchParams();
+    const tabFromUrl = searchParams.get('tab');
+    const [activeTab, setActiveTab] = useState(tabFromUrl === 'apply' ? 'apply' : 'overview');
     const formSectionRef = useRef<HTMLDivElement>(null);
+
+    // Handle tab switch from URL params
+    useEffect(() => {
+        if (tabFromUrl === 'apply') {
+            setActiveTab('apply');
+        }
+    }, [tabFromUrl]);
 
     // Scroll to form when switching to apply or enquiry tabs
     useEffect(() => {
@@ -191,7 +201,7 @@ export default function Admissions() {
 
             {/* Apply Now Tab */}
             {activeTab === 'apply' && (
-                <div ref={formSectionRef}>
+                <div ref={formSectionRef} id="admission-form">
                     <Section
                         title="Online Admission Application"
                         subtitle="Complete the form below to submit your admission application"
